@@ -1,0 +1,16 @@
+<footer class="site-footer">
+    <p>© <span id="year"></span> Academia de Chino · 快乐学中文</p>
+</footer>
+<style>
+    .site-footer {
+        background: #f3f0ff;
+        text-align: center;
+        padding: 10px 0;
+        border-top: 2px solid #e0d9ff;
+        color: #5b42f3;
+        font-size: 14px;
+    }
+</style>
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
