@@ -10,30 +10,23 @@
     <style>
         :root{
             --bg: linear-gradient(135deg,#fff0f6 0%,#e6fcf5 50%,#e7f5ff 100%);
-            --card: #ffffffee;
-            --ink: #263238;
-            --muted:#546e7a;
-            --primary:#7c4dff;
-            --accent:#ff6b6b;
-            --ring: #ffd166;
+            --card:#ffffffee; --ink:#263238; --muted:#546e7a; --primary:#7c4dff; --ring:#ffd166;
         }
         *{box-sizing:border-box}
         html,body{height:100%}
         body{
             margin:0;
-            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+            font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
             color:var(--ink);
             background:var(--bg) fixed;
         }
-        .wrap{
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: clamp(16px, 4vw, 40px);
-        }
+        .wrap{max-width:1100px;margin:0 auto;padding:clamp(16px,4vw,40px)}
+
+        /* ===== Header ===== */
         header{
-            display:flex;
+            display:grid;
+            grid-template-columns: 1fr auto;
             align-items:center;
-            justify-content:space-between;
             gap:16px;
             background: var(--card);
             padding: 18px 20px;
@@ -41,141 +34,139 @@
             box-shadow: 0 10px 30px rgba(33,33,33,.08);
             border: 2px solid #ffffffcc;
         }
-        .brand{
-            display:flex; align-items:center; gap:14px;
-        }
+        .brand{display:flex;align-items:center;gap:14px;min-width:0}
         .logo{
-            width:48px; height:48px; border-radius:14px;
-            display:grid; place-items:center;
-            background: conic-gradient(from 180deg, #ffd166, #ff6b6b, #7c4dff, #06d6a0, #ffd166);
-            box-shadow: 0 6px 14px rgba(0,0,0,.12);
-            animation: spin 10s linear infinite;
-            mask: radial-gradient(circle at center, #0000 54%, #000 55%);
+            width:48px;height:48px;border-radius:14px;display:grid;place-items:center;
+            background:conic-gradient(from 180deg,#ffd166,#ff6b6b,#7c4dff,#06d6a0,#ffd166);
+            box-shadow:0 6px 14px rgba(0,0,0,.12);animation:spin 10s linear infinite;
+            mask:radial-gradient(circle at center,#0000 54%,#000 55%);flex:0 0 48px;
         }
         .logo::after{
             content:"汉";
-            font-family: "Nunito", system-ui, sans-serif;
-            font-weight:800; font-size:22px;
-            color:#fff;
-            text-shadow: 0 1px 2px rgba(0,0,0,.2);
-            position: relative;
-            left: -1px;
+            font-family:"Nunito",system-ui,sans-serif;font-weight:800;font-size:22px;
+            color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.2);position:relative;left:-1px;
         }
-        @keyframes spin{from{transform: rotate(0)}to{transform: rotate(360deg)}}
-        h1{
-            font-family: "Nunito", system-ui, sans-serif;
-            font-size: clamp(26px, 3.8vw, 40px);
-            margin:0; letter-spacing:.5px;
-            color: var(--primary);
+        @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+        h1{font-family:"Nunito",system-ui,sans-serif;font-size:clamp(26px,3.8vw,40px);margin:0;letter-spacing:.5px;color:var(--primary)}
+        .sub{margin:0;color:var(--muted);font-weight:600}
+
+        /* ===== Right-side contact area ===== */
+        .contact-block{
+            display:flex;
+            flex-direction:column;
+            align-items:flex-end;
         }
-        .sub{margin:0; color:var(--muted); font-weight:600}
-        .cta{
-            display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+        .hero-images{
+            display:flex;
+            gap:0;
+            align-items:center;
+            justify-content:flex-end;
         }
-        .pill{
-            border:2px dashed var(--ring);
-            border-radius: 999px;
-            padding: 8px 14px;
-            background:#fffaf0;
-            font-size:14px;
+        .hero-images img{
+            display:block;
+            height:80px;
+            width:auto;
+            object-fit:contain;
+            border:none;
+            margin:0;
+            padding:0;
+            background:none;
         }
+        .phone{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:18px;
+            font-weight:700;
+            text-align:center;
+            margin-top:6px;
+            font-family:"Nunito",sans-serif;
+            gap:6px;
+        }
+        .phone svg{
+            width:18px;
+            height:18px;
+            flex-shrink:0;
+        }
+
+        @media (max-width:560px){
+            header{grid-template-columns:1fr}
+            .contact-block{align-items:flex-start;margin-top:10px}
+            .hero-images{justify-content:flex-start;flex-wrap:wrap}
+            .hero-images img{height:60px}
+            .phone{text-align:left;font-size:16px;margin-top:4px}
+        }
+
+        /* ===== Game cards ===== */
         main{margin-top:22px}
-        .grid{
-            display:grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 18px;
-        }
-        .card{
-            position:relative;
-            background: var(--card);
-            border-radius:18px;
-            padding:18px;
-            box-shadow: 0 10px 26px rgba(0,0,0,.08);
-            border:1px solid #fff;
-            transition: transform .15s ease, box-shadow .15s ease;
-            overflow:hidden;
-            isolation:isolate;
-        }
-        .card::before{
-            content:"";
-            position:absolute; inset:auto -20% 0 -20%; height:48%;
-            background: radial-gradient(120px 60px at 30% 0, #ffd16666, #0000),
-            radial-gradient(140px 70px at 75% 10%, #a78bfa66, #0000);
-            filter: blur(20px); z-index:-1;
-            transition: opacity .2s ease; opacity:.7;
-        }
-        .card:hover{
-            transform: translateY(-3px);
-            box-shadow: 0 16px 34px rgba(0,0,0,.12);
-        }
-        .tag{
-            display:inline-block; font-size:12px; font-weight:700;
-            padding:4px 10px; border-radius:999px;
-            background:#f1f0ff; color:#5b42f3; border:1px solid #ecebff;
-            letter-spacing:.2px;
-        }
-        .title{
-            margin:10px 0 4px; font-weight:800; font-size:18px; line-height:1.2;
-            font-family:"Nunito", system-ui, sans-serif;
-        }
-        .desc{margin:0; color:#607d8b; font-size:14px}
-        .play{
-            display:inline-flex; align-items:center; gap:8px;
-            margin-top:14px; padding:10px 14px; border-radius:12px;
-            background:#1a73e8; color:#fff; text-decoration:none; font-weight:700;
-            box-shadow: 0 6px 14px rgba(26,115,232,.25);
-        }
-        .play span{font-size:13px; opacity:.95}
-        .play:focus-visible{outline:3px solid var(--ring); outline-offset:3px}
-        footer{margin:26px 0 8px; text-align:center; color:#78909c; font-size:13px}
-        .truncate{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+        .card{position:relative;background:var(--card);border-radius:18px;padding:18px;
+            box-shadow:0 10px 26px rgba(0,0,0,.08);border:1px solid #fff;
+            transition:transform .15s ease, box-shadow .15s ease;overflow:hidden;isolation:isolate;}
+        .card::before{content:"";position:absolute;inset:auto -20% 0 -20%;height:48%;
+            background:radial-gradient(120px 60px at 30% 0,#ffd16666,#0000),
+            radial-gradient(140px 70px at 75% 10%,#a78bfa66,#0000);
+            filter:blur(20px);z-index:-1;opacity:.7;transition:opacity .2s ease;}
+        .card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(0,0,0,.12)}
+        .tag{display:inline-block;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:#f1f0ff;color:#5b42f3;border:1px solid #ecebff;letter-spacing:.2px}
+        .title{margin:10px 0 4px;font-weight:800;font-size:18px;line-height:1.2;font-family:"Nunito",system-ui,sans-serif}
+        .desc{margin:0;color:#607d8b;font-size:14px}
+        .play{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:10px 14px;border-radius:12px;background:#1a73e8;color:#fff;text-decoration:none;font-weight:700;box-shadow:0 6px 14px rgba(26,115,232,.25)}
+        .play span{font-size:13px;opacity:.95}
+        .play:focus-visible{outline:3px solid var(--ring);outline-offset:3px}
+        footer{margin:26px 0 8px;text-align:center;color:#78909c;font-size:13px}
+        .truncate{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
     </style>
 </head>
 <body>
 <div class="wrap">
+
     <header>
         <div class="brand">
             <div class="logo" aria-hidden="true"></div>
             <div>
-                <h1>快乐学中文</h1>
+                <h1>华西书院 Academia HUAXI</h1>
                 <p class="sub">Juegos para practicar chino · ¡Diviértete aprendiendo!</p>
             </div>
         </div>
-        <div class="cta">
-            <div class="pill">Haz clic en un juego para comenzar 🎮</div>
+
+        <!-- Right-side logos stacked horizontally, phone number below -->
+        <div class="contact-block" aria-label="Contact information">
+            <div class="hero-images">
+                <img src="images/wechat-logo.jpg" alt="WeChat QR code" loading="eager">
+                <img src="images/school-logo.jpg" alt="School logo" loading="eager">
+            </div>
+            <div class="phone">
+                <!-- Inline phone SVG icon -->
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1v3.54a1 1 0 0 1-1 1A17.91 17.91 0 0 1 3 5a1 1 0 0 1 1-1h3.55a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.26 2.2z"/>
+                </svg>
+                688171681
+            </div>
         </div>
     </header>
 
     <main>
         <div class="grid" role="list">
-            <!-- Juego 1 -->
-            <article class="card" role="listitem">
+            <article class="card" role="article">
                 <span class="tag">Juego</span>
                 <h2 class="title truncate">快乐汉语 2 · Lección 19</h2>
                 <p class="desc">Tarjetas, memoria y emparejar palabras</p>
-                <a class="play" href="快乐汉语2L19.html">
-                    ▶ Jugar <span>快乐汉语2L19.html</span>
-                </a>
+                <a class="play" href="快乐汉语2L19.html">▶ Jugar <span>快乐汉语2L19.html</span></a>
             </article>
 
-            <!-- Juego 2 -->
-            <article class="card" role="listitem">
+            <article class="card" role="article">
                 <span class="tag">Juego</span>
                 <h2 class="title truncate">快乐汉语 2 · Lección 8 · 3 juegos</h2>
                 <p class="desc">Tres minijuegos para repasar vocabulario</p>
-                <a class="play" href="快乐汉语2L83个游戏.html">
-                    ▶ Jugar <span>快乐汉语2L83个游戏.html</span>
-                </a>
+                <a class="play" href="快乐汉语2L83个游戏.html">▶ Jugar <span>快乐汉语2L83个游戏.html</span></a>
             </article>
 
-            <!-- Juego 3 -->
-            <article class="card" role="listitem">
+            <article class="card" role="article">
                 <span class="tag">Juego</span>
                 <h2 class="title truncate">快乐汉语 2 · Lección 21</h2>
                 <p class="desc">Practica con juegos interactivos</p>
-                <a class="play" href="快乐汉语2L21.html">
-                    ▶ Jugar <span>快乐汉语2L21.html</span>
-                </a>
+                <a class="play" href="快乐汉语2L21.html">▶ Jugar <span>快乐汉语2L21.html</span></a>
             </article>
         </div>
     </main>
